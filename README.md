@@ -46,7 +46,7 @@ We welcome contributions from everyone! Here's how you can contribute:
 {
   "name": "vulnerable-blog-app",
   "description": "A vulnerable blog application for testing XSS and CSRF attacks.",
-  "url": "https://vulnerabletarget.com",
+  "url": "https://blog.vulnerabletarget.com",
   "tags": ["xss", "csrf", "web"]
 }
 ```
