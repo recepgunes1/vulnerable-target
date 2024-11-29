@@ -25,7 +25,7 @@ We welcome contributions from everyone! Here's how you can contribute:
        "name": "example-vulnerable-app",
        "description": "An intentionally vulnerable web app for SQL injection testing.",
        "url": "https://vulnerabletarget.com",
-       "technologies": ["php", "mysql"]
+       "technologies": ["php", "mysql"],
        "tags": ["sql-injection", "web", "beginner"]
      }
      ```
@@ -48,7 +48,7 @@ We welcome contributions from everyone! Here's how you can contribute:
   "name": "vulnerable-blog-app",
   "description": "A vulnerable blog application for testing XSS and CSRF attacks.",
   "url": "https://blog.vulnerabletarget.com",
-  "technologies": ["php", "mysql"]
+  "technologies": ["php", "mysql"],
   "tags": ["xss", "csrf", "web"]
 }
 ```
