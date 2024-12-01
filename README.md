@@ -6,6 +6,12 @@
 - Interactive Vulnerability Playground (TODO)
 - CLI (TODO)
 
+---
+
+## Disclaimer
+### Use with caution and additional security measures.
+
+---
 
 ## How to Contribute
 
