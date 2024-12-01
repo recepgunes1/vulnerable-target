@@ -2,14 +2,8 @@
   "targets": [
     {
       "name": "OWASP Juice Shop",
-      "slug": "owasp-juice-shop",
       "description": "Modern insecure web application for security training, awareness demos, CTFs, etc.",
       "url": "https://juice-shop.herokuapp.com",
-      "source": "https://github.com/juice-shop/juice-shop",
-      "reference": [
-        "https://owasp.org/www-project-juice-shop/",
-        "https://juice-shop.github.io/juice-shop/"
-      ],
       "technologies": [
         "nodejs",
         "angular",
