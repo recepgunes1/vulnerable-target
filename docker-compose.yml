@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  juice-shop:
+    image: bkimminich/juice-shop
+    container_name: juiceshop
+    ports:
+      - "3000:3000"
+  
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: dvwa
+    ports:
+      - "8080:80"
+
+  mutillidae:
+    image: citizenstig/nowasp
+    container_name: mutillidae
+    ports:
+      - "8081:80"
+
+  bwapp:
+    image: raesene/bwapp
+    container_name: bwapp
+    ports:
+      - "8082:80"
+
+  nodegoat:
+    image: nodegoat/nodegoat
+    container_name: nodegoat
+    ports:
+      - "4000:4000"
+
+  metasploitable:
+    image: twelvesec/metasploitable
+    container_name: metasploitable
+    ports:
+      - "2222:22"
+      - "8023:23"
+      - "8083:80"
+  
+  broken-crystals:
+    image: owaspbrokencrystals/brokencrystals
+    container_name: broken-crystals
+    ports:
+      - "5000:5000"
+
+  dvws:
+    image: vgartvichwallarm/dvws
+    container_name: dvws
+    ports:
+      - "8888:80"
