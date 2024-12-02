@@ -1,3 +1,6 @@
+use colored::*;
+
+
 pub fn search_service(keyword: &str) {
     let services = vec![
         ("juice-shop", vec!["owasp", "api", "xss", "top10"]),
@@ -10,7 +13,7 @@ pub fn search_service(keyword: &str) {
         ("dvws", vec!["api", "rest", "xss"]),
     ];
 
-    println!("Searching for services matching '{}':", keyword);
+    println!("{}", format!("Searching for services matching '{}':", keyword).yellow().bold());
     let mut found = false;
 
     for (service, tags) in services.iter() {
@@ -21,6 +24,6 @@ pub fn search_service(keyword: &str) {
     }
 
     if !found {
-        println!("No services found matching '{}'.", keyword);
+        println!("{}", format!("No services found matching '{}:", keyword).red().bold());
     }
 }
