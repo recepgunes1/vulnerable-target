@@ -28,46 +28,6 @@
       ]
     },
     {
-      "name": "Damn Vulnerable iOS App (DVIA)",
-      "description": "Mobile app for testing OWASP Top 10 Mobile Risks.",
-      "url": "https://github.com/prateek147/DVIA-v2",
-      "technologies": [
-        "swift"
-      ],
-      "tags": [
-        "ios",
-        "mobile",
-        "owasp"
-      ]
-    },
-    {
-      "name": "OWASP Mutillidae II",
-      "description": "Educational tool with over 40 vulnerabilities, including OWASP Top 10.",
-      "url": "https://github.com/webpwnized/mutillidae",
-      "technologies": [
-        "php",
-        "mysql"
-      ],
-      "tags": [
-        "owasp",
-        "web",
-        "training"
-      ]
-    },
-    {
-      "name": "WebGoat",
-      "description": "Server-side flaws and educational lessons in a multi-platform environment.",
-      "url": "https://owasp.org/www-project-webgoat/",
-      "technologies": [
-        "java"
-      ],
-      "tags": [
-        "owasp",
-        "web",
-        "server-side"
-      ]
-    },
-    {
       "name": "SecurityTweets",
       "description": "HTML5-based application for testing with Acunetix tools.",
       "url": "http://testhtml5.vulnweb.com",
