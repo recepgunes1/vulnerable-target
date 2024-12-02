@@ -1,5 +1,6 @@
 # Vulnerable Target
 
+![VT CLI Tool](./vt.PNG)
 
 ## Features
 - Community-Curated List of Vulnerable Targets
