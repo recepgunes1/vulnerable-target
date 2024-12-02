@@ -1,51 +1,8 @@
 use subprocess::Exec;
+use colored::*;
+use std::fmt;
+use serde_json::Value;
 
-pub async fn start_service(service: &str) {
-    if service == "all" {
-        println!("Starting all services...");
-        let result = Exec::shell("docker-compose up -d").join();
-        match result {
-            Ok(_) => println!("All services started."),
-            Err(e) => eprintln!("Error starting services: {}", e),
-        }
-    } else {
-        println!("Starting service: {}", service);
-        let result = Exec::shell(format!("docker-compose up -d {}", service)).join();
-        match result {
-            Ok(_) => {
-                println!("Service '{}' started.", service);
-                inspect_service(service).await; 
-            }
-            Err(e) => eprintln!("Error starting service '{}': {}", service, e),
-        }
-    }
-}
-
-pub async fn inspect_service(service: &str) {
-    println!("Inspecting service: {}", service);
-    let cmd = format!("docker inspect {}", service);
-    let result = Exec::shell(&cmd).capture();
-
-    match result {
-        Ok(output) => {
-            let output_str = output.stdout_str();
-            match parse_docker_inspect(&output_str) {
-                Ok(info) => {
-                    if info.ip_address.is_empty() {
-                        println!("Warning: IP address is not available.");
-                    }
-                    println!(
-                        "Access Info:\n- IP Address: {}\n- Web Port: {}",
-                        info.ip_address,
-                        info.web_port.unwrap_or_else(|| "N/A".to_string())
-                    );
-                }
-                Err(e) => eprintln!("Failed to parse inspect output: {}", e),
-            }
-        }
-        Err(e) => eprintln!("Error inspecting service '{}': {}", service, e),
-    }
-}
 
 #[derive(Debug)]
 struct ServiceInfo {
@@ -53,25 +10,88 @@ struct ServiceInfo {
     web_port: Option<String>,
 }
 
+impl fmt::Display for ServiceInfo {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{}\n{}",
+            format!("- IP Address: {}", self.ip_address).blue(),
+            format!("- Web Port: {}", self.web_port.as_deref().unwrap_or("N/A")).cyan()
+        )
+    }
+}
+
+
+pub async fn start_service(service: &str) {
+    match service {
+        "all" => {
+            println!("Starting all services...");
+            if let Err(e) = Exec::shell("docker-compose up -d").join() {
+                eprintln!("{}", format!("Error starting all services: {}", e).red());
+            } else {
+                println!("{}", "All services started successfully.".green());
+            }
+        }
+        _ => {
+            println!("{}", format!("Starting service: {}", service).yellow());
+            let command = format!("docker-compose up -d {}", service);
+            if let Err(e) = Exec::shell(&command).join() {
+                eprintln!("{}", format!("Error starting service '{}': {}", service, e).red());
+            } else {
+                println!("{}", format!("Service '{}' started successfully.", service).green());
+                inspect_service(service).await;
+            }
+        }
+    }
+}
+
+pub async fn inspect_service(service: &str) {
+    println!("{}", format!("Inspecting service: {}", service).yellow());
+
+    let command = format!("docker inspect {}", service);
+    match Exec::shell(&command).capture() {
+        Ok(output) => {
+            if let Err(e) = parse_and_display_inspect_output(&output.stdout_str()) {
+                eprintln!("{}", format!("Failed to process inspection output for '{}': {}", service, e).red());
+            }
+        }
+        Err(e) => eprintln!("{}", format!("Error inspecting service '{}': {}", service, e).red()),
+    }
+}
+
+fn parse_and_display_inspect_output(output: &str) -> Result<(), String> {
+    match parse_docker_inspect(output) {
+        Ok(info) => {
+            if info.ip_address.is_empty() {
+                println!("{}", "Warning: IP address is not available.".yellow());
+            }
+            println!("{}\n{}", "Access Info:".bold(), info);
+            Ok(())
+        }
+        Err(e) => Err(format!("Parsing error: {}", e)),
+    }
+}
+
 fn parse_docker_inspect(output: &str) -> Result<ServiceInfo, &'static str> {
-    let json: serde_json::Value = serde_json::from_str(output).map_err(|_| "Invalid JSON")?;
+    let json: Value = serde_json::from_str(output).map_err(|_| "Invalid JSON format")?;
 
     let networks = json[0]["NetworkSettings"]["Networks"]
         .as_object()
-        .ok_or("No networks found")?;
+        .ok_or("No network configuration found")?;
 
     let network = networks
-        .get("vulnerabilitytargets_default")
+        .get("vt_vulnerabilitytargets_default")
         .ok_or("Network 'vulnerabilitytargets_default' not found")?;
 
     let ip_address = network["IPAddress"]
         .as_str()
-        .unwrap_or("") // empty string if no ip address
+        .unwrap_or_default()
         .to_string();
 
     let ports = json[0]["NetworkSettings"]["Ports"]
         .as_object()
-        .ok_or("No ports found")?;
+        .ok_or("No port configuration found")?;
+
     let web_port = ports
         .get("80/tcp")
         .and_then(|v| v.as_array())
