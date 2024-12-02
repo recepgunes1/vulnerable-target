@@ -80,7 +80,7 @@ fn parse_docker_inspect(output: &str) -> Result<ServiceInfo, &'static str> {
         .ok_or("No network configuration found")?;
 
     let network = networks
-        .get("vulnerabilitytargets_default")
+        .get("vt_vulnerabilitytargets_default")
         .ok_or("Network 'vulnerabilitytargets_default' not found")?;
 
     let ip_address = network["IPAddress"]
