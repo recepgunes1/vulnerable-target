@@ -194,7 +194,7 @@
         "web",
         "vulnerability",
         "xss",
-        "broken-access-control",
+        "broken-access-control"
       ]
     },
     {
