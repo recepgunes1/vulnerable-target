@@ -192,9 +192,7 @@
       ],
       "tags": [
         "web",
-        "vulnerability"
-      ],
-      "vulnerabilities": [
+        "vulnerability",
         "xss",
         "broken-access-control",
         "open-redirect"
