@@ -177,6 +177,94 @@
         "web",
         "rest-api"
       ]
+    },
+    {
+      "name": "FastFoodHackings",
+      "description": "An intentionally vulnerable web app for practicing fast food-related hacking scenarios.",
+      "url": "https://www.bugbountytraining.com/fastfoodhackings/",
+      "technologies": [
+        "php",
+        "mysql",
+        "jquery",
+        "nginx",
+        "html5",
+        "ubuntu"
+      ],
+      "tags": [
+        "web",
+        "vulnerability",
+        "xss",
+        "broken-access-control"
+      ]
+    },
+    {
+      "name": "OWASP Bricks",
+      "description": "A vulnerable web app for practicing web security concepts",
+      "url": "https://issauga.lt/index.php",
+      "technologies": [
+        "php",
+        "mysql",
+        "javascript"
+      ],
+      "tags": [
+        "web",
+        "vulnerability",
+        "owasp", 
+        "sql-injection",
+        "xss",
+        "csrf",
+        "command-injection",
+        "file-inclusion",
+        "authentication-flaws"
+      ]
+    },
+    {
+      "name": "Hackxor",
+      "description": "A training platform designed to simulate real-world web hacking scenarios.",
+      "url": "https://hackxor.net/",
+      "technologies": [
+        "nginx",
+        "php",
+        "mysql",
+        "javascript",
+        "html5",
+        "css",
+        "lets-encrypt",
+        "namecheap-dns",
+        "digital-ocean"
+      ],
+      "tags": [
+        "web",
+        "firewall bypass",
+        "sql-injection",
+        "xss",
+        "csrf",
+        "remote-file-inclusion",
+        "command-injection",
+        "authentication-bypass"     
+      ]
+    },
+    {
+      "name": "Google Gruyere",
+      "description": "A lightweight web application intentionally full of security bugs for vulnerability testing.",
+      "url": "https://google-gruyere.appspot.com/",
+      "technologies": [
+        "python",
+        "google-cloud",
+        "html",
+        "css",
+        "javascript"
+      ],
+      "tags": [
+        "web",
+        "vulnerability-testing",
+        "google",
+        "xss",
+        "csrf",
+        "authentication-bypass",
+        "injection",
+        "open-redirect"
+      ]
     }
   ]
 }
