@@ -184,7 +184,11 @@
       "url": "https://www.bugbountytraining.com/fastfoodhackings/",
       "technologies": [
         "php",
-        "mysql"
+        "mysql",
+        "jquery",
+        "nginx",
+        "html5",
+        "ubuntu"
       ],
       "tags": [
         "web",
