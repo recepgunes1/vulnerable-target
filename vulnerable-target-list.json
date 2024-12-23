@@ -197,6 +197,50 @@
         "broken-access-control",
         "open-redirect"
       ]
+    },
+    {
+      "name": "OWASP Bricks",
+      "description": "A vulnerable web app for practicing web security concepts",
+      "url": "https://sechow.com/bricks",
+      "technologies": [
+        "php",
+        "mysql",
+        "javascript"
+      ],
+      "tags": [
+        "web",
+        "vulnerability",
+        "owasp", 
+        "sql-injection",
+        "xss",
+        "csrf",
+        "command-injection",
+        "file-inclusion",
+        "authentication-flaws"
+      ]
+    },
+    {
+      "name": "Rails Goat",
+      "description": "A vulnerable Ruby on Rails app for security training.",
+      "url": "https://railsgoat.security/",
+      "technologies": [
+        "ruby-on-rails",
+        "sqlite",
+        "javascript",
+        "html5",
+        "css"
+      ],
+      "tags": [
+        "web",
+        "vulnerability",
+        "owasp",
+        "sql-injection",
+        "xss",
+        "csrf",
+        "mass-assignment",
+        "broken-authentication",
+        "insecure-direct-object-references"
+      ],
     }
   ]
 }
