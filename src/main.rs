@@ -6,6 +6,22 @@ use crate::modules::services::search_service; // Import search service function
 
 #[tokio::main]
 async fn main() {
+    // banner 
+    let banner = r#"
+    @@@@@@@@&###&@@@@@@@
+    @@@@@@@@&###&@@@@@@@
+    @@@@@@@#^...7@@@@@@@
+    @@@@@@@&:   !@@@@@@@
+    @@@@@@@@BGGGB?777P@@
+    @@@@@@@@@@@@#    !@@
+    @@&BBBB&BBBB#!^^^5@@
+    @@J   .?.   ?:.. ?@@
+    @@Y ..:Y....J:...?@@
+    @@&####&####&####&@@
+    @@ Happy  Hacking @@
+    "#;
+    
+    println!("{}", banner);
     let matches = Command::new("vulnerability target")
         .bin_name("vt")
         .about("CLI to manage Docker-based vulnerable labs")

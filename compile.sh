@@ -8,7 +8,7 @@ if [ -d "vt" ]; then
     rm -rf "vt"
 fi
 
-if [ -d "Cargo.lock"]; then
+if [ -f "Cargo.lock" ]; then 
     rm -rf "Cargo.lock"
 fi
 
