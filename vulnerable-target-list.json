@@ -179,12 +179,22 @@
       ]
     },
     {
-      "name": "fastfoodhackings",
+      "name": "FastFoodHackings",
       "description": "An intentionally vulnerable web app for practicing fast food-related hacking scenarios.",
       "url": "https://www.bugbountytraining.com/fastfoodhackings/",
-      "technologies": ["php", "mysql"],
-      "tags": ["web", "beginner", "vulnerability"],
-      "vulnerabilities": ["xss", "broken-access-control", "open-redirect"]
+      "technologies": [
+        "php",
+        "mysql"
+      ],
+      "tags": [
+        "web",
+        "vulnerability"
+      ],
+      "vulnerabilities": [
+        "xss",
+        "broken-access-control",
+        "open-redirect"
+      ]
     }
   ]
 }
