@@ -195,7 +195,6 @@
         "vulnerability",
         "xss",
         "broken-access-control",
-        "open-redirect"
       ]
     },
     {
@@ -220,26 +219,51 @@
       ]
     },
     {
-      "name": "Rails Goat",
-      "description": "A vulnerable Ruby on Rails app for security training.",
-      "url": "https://github.com/OWASP/railsgoat",
+      "name": "Hackxor",
+      "description": "A training platform designed to simulate real-world web hacking scenarios.",
+      "url": "https://hackxor.net/",
       "technologies": [
-        "ruby-on-rails",
-        "sqlite",
+        "nginx",
+        "php",
+        "mysql",
         "javascript",
         "html5",
-        "css"
+        "css",
+        "lets-encrypt",
+        "namecheap-dns",
+        "digital-ocean"
       ],
       "tags": [
         "web",
-        "vulnerability",
-        "owasp",
+        "firewall bypass",
         "sql-injection",
         "xss",
         "csrf",
-        "mass-assignment",
-        "broken-authentication",
-        "insecure-direct-object-references"
+        "remote-file-inclusion",
+        "command-injection",
+        "authentication-bypass"     
+      ]
+    },
+    {
+      "name": "Google Gruyere",
+      "description": "A lightweight web application intentionally full of security bugs for vulnerability testing.",
+      "url": "https://google-gruyere.appspot.com/",
+      "technologies": [
+        "python",
+        "google-cloud",
+        "html",
+        "css",
+        "javascript"
+      ],
+      "tags": [
+        "web",
+        "vulnerability-testing",
+        "google",
+        "xss",
+        "csrf",
+        "authentication-bypass",
+        "injection",
+        "open-redirect"
       ]
     }
   ]
