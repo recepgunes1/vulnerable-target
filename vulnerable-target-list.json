@@ -240,7 +240,7 @@
         "mass-assignment",
         "broken-authentication",
         "insecure-direct-object-references"
-      ],
+      ]
     }
   ]
 }
