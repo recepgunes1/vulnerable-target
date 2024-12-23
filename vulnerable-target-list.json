@@ -201,7 +201,7 @@
     {
       "name": "OWASP Bricks",
       "description": "A vulnerable web app for practicing web security concepts",
-      "url": "https://sechow.com/bricks",
+      "url": "https://issauga.lt/index.php",
       "technologies": [
         "php",
         "mysql",
