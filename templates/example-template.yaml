@@ -23,7 +23,8 @@ providers:
       - vulnerabletarget.com
   llm:
     content: |
-      # prompt
+      # prompt:
+      # model: 
   docker:
     content: |
       # (Optional) full Dockerfile content to build from scratch
