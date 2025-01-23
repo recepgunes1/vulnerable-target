@@ -1,0 +1,71 @@
+id: vulnerable-target
+
+info:
+  name: Vulnerable Target
+  author: hhsteam
+  description: |
+    Vulnerable Target
+  references:
+    - http://www.vulnerabletarget.com
+  technologies:
+    - php
+    - mysql
+  tags:
+    - owasp
+    - web
+    - vulnerabilities
+  metadata: #additional metadata for the template
+
+
+providers:
+  online: # intentionally left vulnerable instances
+    targets:
+      - vulnerabletarget.com
+  llm:
+    content: |
+      # prompt
+  docker:
+    content: |
+      # (Optional) full Dockerfile content to build from scratch
+      #if it's image start with IMAGE:php:7.4-apache
+      FROM php:7.4-apache
+      RUN docker-php-ext-install mysqli
+      # ...
+  docker_compose:
+    content: |
+      version: '3.3'
+      services:
+        app:
+          image: some-vulnerable-target:latest
+          ports:
+            - "80:80"
+          # ...
+  
+  # For instance: CloudFormation template, Terraform snippet, or other cloud providers/services
+  aws:
+    content: |
+      # CloudFormation/Terraform/Pulumi snippet
+      # ....
+  gcp:
+    content: |
+      # CloudFormation/Terraform/Pulumi snippet
+      # ....
+  azure:
+    content: |
+      # CloudFormation/Terraform/Pulumi snippet
+      # ....
+  nix:
+    content: |
+      { pkgs ? import <nixpkgs> {} }:
+      pkgs.stdenv.mkDerivation {
+        name = "vulnerable-target-env";
+        # ...
+      }
+  custom:
+    # (Optional) generic script-based approach
+    setup: |
+      # Shell script to set up environment
+      # ...
+    teardown: |
+      # Shell script to tear down environment
+      # ...
