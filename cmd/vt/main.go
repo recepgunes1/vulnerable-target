@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/happyhackingspace/vulnerable-target/pkg/cli"
+	"github.com/happyhackingspace/vulnerable-target/internal/cli"
 )
 
 func main() {
