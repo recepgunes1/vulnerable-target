@@ -1,3 +1,9 @@
 package main
 
-func main() {}
+import (
+	"github.com/happyhackingspace/vulnerable-target/internal/cli"
+)
+
+func main() {
+	cli.Execute()
+}
