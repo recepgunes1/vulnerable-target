@@ -81,6 +81,10 @@ var rootCmd = &cobra.Command{
 				strings.Join(slices.Collect(maps.Keys(ValidLogLevels)), ", "))
 		}
 
+		if settings.ProviderName == "" {
+			log.Fatal().Msgf("provider is required")
+		}
+
 		if !ValidProviders[settings.ProviderName] {
 			log.Fatal().Msgf("invalid provider '%s'. Valid providers are: %s",
 				settings.ProviderName,
@@ -93,6 +97,7 @@ var rootCmd = &cobra.Command{
 
 		log.Info().Msgf("running template %s on %s", settings.TemplateID, settings.ProviderName)
 	},
+	SilenceErrors: true,
 }
 
 func Execute() {
