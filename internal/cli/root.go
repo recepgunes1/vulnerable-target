@@ -2,20 +2,25 @@ package cli
 
 import (
 	"fmt"
-	"log"
 	"maps"
 	"slices"
 	"strings"
 
 	"github.com/happyhackingspace/vulnerable-target/internal/config"
+	"github.com/happyhackingspace/vulnerable-target/internal/logger"
+
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 )
 
 var ValidLogLevels = map[string]bool{
-	"info":  true,
-	"warn":  true,
-	"error": true,
-	"fatal": true,
+	zerolog.DebugLevel.String(): true,
+	zerolog.InfoLevel.String():  true,
+	zerolog.WarnLevel.String():  true,
+	zerolog.ErrorLevel.String(): true,
+	zerolog.FatalLevel.String(): true,
+	zerolog.PanicLevel.String(): true,
 }
 
 var ValidProviders = map[string]bool{
@@ -31,7 +36,7 @@ func init() {
 
 	rootCmd.Flags().BoolP("version", "V", false, "Show the current version of the tool")
 
-	rootCmd.Flags().StringVarP(&settings.VerbosityLevel, "verbosity", "v", "info",
+	rootCmd.Flags().StringVarP(&settings.VerbosityLevel, "verbosity", "v", zerolog.InfoLevel.String(),
 		fmt.Sprintf("Set the verbosity level for logs (%s)",
 			strings.Join(slices.Collect(maps.Keys(ValidLogLevels)), ", ")))
 
@@ -43,16 +48,15 @@ func init() {
 
 	rootCmd.Flags().StringVar(&settings.TemplateID, "id", "",
 		"Specify a template ID for targeted vulnerable environment")
-
-	rootCmd.MarkFlagRequired("provider")
-
-	rootCmd.MarkFlagRequired("id")
 }
 
 var rootCmd = &cobra.Command{
 	Use:     "vt",
 	Short:   "Create vulnerable environment",
 	Version: "1.0.0",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		logger.Init()
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		settings := config.GetSettings()
 
@@ -67,32 +71,37 @@ var rootCmd = &cobra.Command{
 		}
 
 		if listTemplates, _ := cmd.Flags().GetBool("list-templates"); listTemplates {
-			log.Println("list templates")
+			log.Info().Msg("list templates")
 			return
 		}
 
 		if !ValidLogLevels[settings.VerbosityLevel] {
-			log.Fatalf("invalid provider '%s'. Valid providers are: %s\n",
+			log.Fatal().Msgf("invalid provider '%s'. Valid providers are: %s",
 				settings.VerbosityLevel,
 				strings.Join(slices.Collect(maps.Keys(ValidLogLevels)), ", "))
 		}
 
+		if settings.ProviderName == "" {
+			log.Fatal().Msgf("provider is required")
+		}
+
 		if !ValidProviders[settings.ProviderName] {
-			log.Fatalf("invalid provider '%s'. Valid providers are: %s\n",
+			log.Fatal().Msgf("invalid provider '%s'. Valid providers are: %s",
 				settings.ProviderName,
 				strings.Join(slices.Collect(maps.Keys(ValidProviders)), ", "))
 		}
 
 		if settings.TemplateID == "" {
-			log.Fatalf("template is required")
+			log.Fatal().Msgf("template is required")
 		}
 
-		log.Printf("running template %s on %s\n", settings.TemplateID, settings.ProviderName)
+		log.Info().Msgf("running template %s on %s", settings.TemplateID, settings.ProviderName)
 	},
+	SilenceErrors: true,
 }
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		log.Fatal(err.Error())
+		log.Fatal().Msg(err.Error())
 	}
 }
