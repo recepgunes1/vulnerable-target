@@ -4,7 +4,7 @@
 ## Features
 - Community-Curated List of Vulnerable Targets
 - Interactive Vulnerability Playground (TODO)
-- CLI (TODO)
+- CLI (In-Progress)
 
 ---
 
