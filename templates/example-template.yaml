@@ -26,6 +26,8 @@ providers:
       # prompt:
       # model: 
   docker:
+    ports: # add ports for container
+      "hostPort/protocol": "containerPort"
     content: |
       # (Optional) full Dockerfile content to build from scratch
       #if it's image start with IMAGE:php:7.4-apache

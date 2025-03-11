@@ -4,9 +4,31 @@
 ## Features
 - Community-Curated List of Vulnerable Targets
 - Interactive Vulnerability Playground (TODO)
-- CLI (TODO)
+- CLI (In-Progress)
 
----
+## How to Run
+1. Clone the repository
+```bash
+git clone https://github.com/HappyHackingSpace/vulnerable-target.git
+cd vulnerable-target
+```
+
+2. Install dependencies
+```bash
+go mod download
+```
+
+3. Create a `.env` file in the root directory with your configuration values:
+
+```bash
+cp .env.example .env
+```
+
+4. Run the application with:
+
+```bash
+go run cmd/vt/main.go
+```
 
 ## Disclaimer
 ### Use with caution and additional security measures.

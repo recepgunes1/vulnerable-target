@@ -3,11 +3,13 @@ package cli
 import (
 	"fmt"
 	"maps"
+	"os"
 	"slices"
 	"strings"
 
 	"github.com/happyhackingspace/vulnerable-target/internal/config"
 	"github.com/happyhackingspace/vulnerable-target/internal/logger"
+	"github.com/happyhackingspace/vulnerable-target/pkg/templates"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -57,21 +59,19 @@ var rootCmd = &cobra.Command{
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		logger.Init()
 	},
+	SilenceErrors: true,
 	Run: func(cmd *cobra.Command, args []string) {
 		settings := config.GetSettings()
 
 		if len(args) == 0 && cmd.Flags().NFlag() == 0 {
 			cmd.Help()
-			return
-		}
-
-		if versionFlag, _ := cmd.Flags().GetBool("version"); versionFlag {
-			fmt.Println(cmd.Version)
+			os.Exit(0)
 			return
 		}
 
 		if listTemplates, _ := cmd.Flags().GetBool("list-templates"); listTemplates {
-			log.Info().Msg("list templates")
+			templates.List()
+			os.Exit(0)
 			return
 		}
 
@@ -93,11 +93,12 @@ var rootCmd = &cobra.Command{
 
 		if settings.TemplateID == "" {
 			log.Fatal().Msgf("template is required")
+		} else {
+			if _, ok := templates.Templates[settings.TemplateID]; !ok {
+				log.Fatal().Msg("there is no template given id")
+			}
 		}
-
-		log.Info().Msgf("running template %s on %s", settings.TemplateID, settings.ProviderName)
 	},
-	SilenceErrors: true,
 }
 
 func Execute() {
